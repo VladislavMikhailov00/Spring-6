@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -28,14 +27,14 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Email(message = "Email should be valid")
-    private String email;
+    @Column(name = "age")
+    private Byte age;
 
     public User() {}
 
-    public User(String firstName, String lastName, String email) {
+    public User(String firstName, String lastName, Byte age) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
+        this.age = age;
     }
 }

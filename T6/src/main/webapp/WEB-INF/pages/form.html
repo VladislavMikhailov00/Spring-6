@@ -16,9 +16,8 @@
     <label>Фамилия:</label>
     <input type="text" th:field="*{lastName}">
 
-    <label>Email:</label>
-    <input type="email" th:field="*{email}" required>
-    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+    <label>Age:</label>
+    <input type="text" th:field="*{age}">
 
     <button type="submit" th:text="${user.id} ? 'Сохранить' : 'Создать'"></button>
     <a th:href="@{/users}">Отмена</a>

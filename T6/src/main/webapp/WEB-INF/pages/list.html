@@ -13,7 +13,7 @@
 <div th:each="user : ${users}">
     <span th:text="${user.firstName}"></span>
     <span th:text="${user.lastName}"></span>
-    <span th:text="${user.email}"></span>
+    <span th:text="${user.age}"></span>
     <a th:href="@{/users/{id}/edit(id=${user.id})}">Редактировать</a>
     <a th:href="@{/users/delete(id=${user.id})}">Удалить</a>
 </div>
