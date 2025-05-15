@@ -1,48 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
-
-<head th:replace="layouts/main :: htmlhead"/>
-
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Форма пользователя</title>
+</head>
 <body>
+<h1>Форма пользователя</h1>
 
-<div th:replace="layouts/main :: navigation" />
+<form th:action="@{/users}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}">
 
-<div class="container">
-    <div class="row">
-        <div class="col text-center">
-            <h1 class="mt-5">CRUD-приложение</h1>
-            <p class="lead">Создание нового пользователя</p>
-        </div>
-    </div>
-</div>
+    <label>Имя:</label>
+    <input type="text" th:field="*{firstName}" required>
+    <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
 
-<div class="container">
-    <form th:method="POST" th:action="@{/users}" th:object="${user}">
-        <input type="hidden" th:field="*{id}" th:value="*{getId()}">
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label for="name">Имя</label>
-                <input type="text" class="form-control" id="name" th:field="*{firstName}" th:value="*{getFirstName()}" placeholder="Enter user name" required>
-                <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"/>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="last_name">Фамилия</label>
-                <input type="text" class="form-control" id="last_name" th:field="*{lastName}" th:value="*{getLastName()}" placeholder="Enter last name">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label for="email">e-mail</label>
-                <input type="text" class="form-control" id="email" th:field="*{email}" th:value="*{getEmail()}" placeholder="Enter email" required>
-                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
-            </div>
-        </div>
+    <label>Фамилия:</label>
+    <input type="text" th:field="*{lastName}">
 
-        <button class="btn btn-secondary" type="submit" th:text="*{getId()} ? 'Save' : 'Create'"/>
-        <a class="btn btn-light border-dark" href="/users">Cancel</a>
-    </form>
-</div>
+    <label>Email:</label>
+    <input type="email" th:field="*{email}" required>
+    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 
-<div th:replace="layouts/main :: footer"></div>
+    <button type="submit" th:text="${user.id} ? 'Сохранить' : 'Создать'"></button>
+    <a th:href="@{/users}">Отмена</a>
+</form>
 </body>
 </html>
